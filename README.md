@@ -8,7 +8,7 @@
 
 between subtypes from the pathway-derived subtypes (PDS), [consensus molecular subtypes (CMS)](https://doi.org/10.1038/nm.3967) and [intrinsic-consensus molecular subtypes (iCMS)](https://doi.org/10.1038/s41588-022-01100-4) classification systems of colorectal cancer.
 
-
+![SubtypeExploreR Schematic](docs/images/SubtypeExploreR_schematic.png)
 
 ## Access
 
