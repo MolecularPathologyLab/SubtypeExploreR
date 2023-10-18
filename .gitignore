@@ -1,0 +1,15 @@
+### macOS ###
+.DS_Store
+
+### R ###
+.Rhistory
+.Rapp.history
+.Rproj.user
+.RData
+.Ruserdata
+.Rprofile
+*.Rproj
+
+### renv ###
+renv/
+renv.lock

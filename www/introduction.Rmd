@@ -1,0 +1,64 @@
+---
+title: "**Introduction**"
+author: ""
+date: ''
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<style>
+body {
+    position: absolute;
+    left: 0px;}
+</style>
+
+SubtypeExploreR is a user-friendly platform to compare the expression of genes of interest or gene sets of interest in the Pathway-Derived Subtypes (PDS), 
+<a href="https://doi.org/10.1038/nm.3967" target="_blank">Consensus Molecular Subtypes (CMS)</a>
+and <a href="https://doi.org/10.1038/s41588-022-01100-4" target="_blank">intrinsic-Consensus Molecular Subtypes (iCMS)</a> within two colorectal cancer cohorts, FOCUS and GSE39582.
+
+<br>
+
+## Cohorts
+#### FOCUS
+The FOCUS cohort consists of n=360 formalin-fixed paraffin-embedded primary colorectal tumour samples transcriptionally profiled by microarray (Almac Xcel array). More information on this cohort can be found 
+in the associated publication, by Malla *et al.*, entitled 
+<a href="https://doi.org/10.1158/1078-0432.CCR-20-3237" target="_blank">"In-depth Clinical and Biological Exploration of DNA Damage Immune Response as a Biomarker for Oxaliplatin Use in Colorectal Cancer"</a>
+or Gene Expression Omnibus (GEO) under accession number
+<a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE156915" target="_blank">GSE156915</a>.
+
+#### GSE39582
+The GSE39582 cohort consists of n=566 primary colon tumour samples transcriptionally profiled by microarray (Affymetrix U133Plus2 array). For more information on this cohort, see the associated
+publication, by Marisa *et al.*, entitled <a href="https://doi.org/10.1371/journal.pmed.1001453" target="_blank"> "Gene expression classification of colon cancer into molecular subtypes: characterization, validation, and prognostic value"</a>.
+
+<br>
+
+## Analysis Modules
+SubtypeExploreR has two analysis modules, Expression Boxplots and ssGSEA.
+
+#### Expression Boxplots
+The Expression Boxplots tab enables the user to select a gene of interest and compare the expression of that gene in the PDS subtypes, CMS subtypes or iCMS subtypes.
+
+#### ssGSEA
+The ssGSEA tab enables the user to perform single sample gene set enrichment analysis (ssGSEA) 
+for a gene signature. Users can choose an existing gene signature from the Hallmark, KEGG, BioCarta, Reactome or Pathway Interaction Database (PID) gene set collections. Alternatively, the user can select the "Custom" option and then enter a list of gene symbols to define their own gene signature. ssGSEA scores will then be calculated for the chosen/user-defined signature in each sample in each cohort and the user can choose to compare the scores between PDS subtypes, CMS subtypes or iCMS subtypes.
+
+<br>
+
+## Subtype Calling
+#### PDS
+The PDS subtype of each sample was determined using the `PDSpredict` function from the
+<a href="https://github.com/MolecularPathologyLab/PDSclassifier" target="_blank">PDSclassifier</a> R package with the default `threshold` of 0.6.
+
+#### CMS
+Samples were assigned to a CMS subtype by the 
+<a href="https://github.com/Sage-Bionetworks/CMSclassifier" target="_blank">CMSclassifier</a> 
+R package (v1.0.0) with the random forest method via the `classifyCMS.RF` function. For the FOCUS cohort the `minPosterior` threshold was set to 0.4 while for the GSE39582 cohort a `minPosterior` threshold of 0.5 was used.
+
+#### iCMS
+For iCMS classification, the iCMS gene signatures were extracted to create an iCMS template that was subsequently used with the nearest template prediction (NTP) method embedded in the
+<a href="https://github.com/Lothelab/CMScaller" target="_blank">CMScaller</a> 
+R package (v2.0.1), as previously described by Joanito *et al.* in the 
+<a href="https://doi.org/10.1038/s41588-022-01100-4" target="_blank">original iCMS publication</a>. Samples with an `FDR` greater than 0.05 were classed as unknown (UNK).
